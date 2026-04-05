@@ -9,25 +9,37 @@ import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 
 export const Home = () => {
-    return <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+  return (
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/*Theme Toggle */}
+      <ThemeToggle />
+      {/* Background Effects */}
+      <StarBackground />
 
-        {/*Theme Toggle */}
-        <ThemeToggle />
-        {/* Background Effects */}
-        <StarBackground />
+      {/*Navbar */}
+      <NavBar />
+      {/*Main Content */}
+      <main>
+        <HeroSection />
+        <div className="-mt-10">
+          <AboutSection />
+        </div>
 
-        {/*Navbar */}
-        <NavBar />
-        {/*Main Content */}
-        <main>
-            <HeroSection />
-            <AboutSection />
-            <SkillsSection />
-            <ProjectsSection />
-            <ContactSection />
-        </main>
+        <div className="-mt-10">
+          <SkillsSection />
+        </div>
 
-        {/*Footer */}
-        <Footer />
-    </div>;
+        <div className="-mt-10">
+          <ProjectsSection />
+        </div>
+
+        <div className="-mt-10">
+          <ContactSection />
+        </div>
+      </main>
+
+      {/*Footer */}
+      <Footer />
+    </div>
+  );
 };
