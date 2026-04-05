@@ -5,7 +5,7 @@ import gsap from "gsap";
 export const HeroSection = () => {
   // Master ref for GSAP context (Handles flawless cleanup)
   const heroRef = useRef(null);
-  
+
   // Individual element refs
   const imageRef = useRef(null);
   const textRef = useRef(null);
@@ -16,10 +16,9 @@ export const HeroSection = () => {
   useEffect(() => {
     // gsap.context guarantees no memory leaks and prevents double-firing in React Strict Mode
     let ctx = gsap.context(() => {
-      
       // Create a master timeline with a default ease for a cohesive feel
       const tl = gsap.timeline({
-        defaults: { ease: "power3.out" }
+        defaults: { ease: "power3.out" },
       });
 
       // 1. Image Entrance: Gentle floating pop + scale
@@ -29,7 +28,7 @@ export const HeroSection = () => {
           scale: 0.7,
           opacity: 0,
           borderRadius: "50%",
-          rotate: -5
+          rotate: -5,
         },
         {
           scale: 1,
@@ -38,7 +37,7 @@ export const HeroSection = () => {
           rotate: 0,
           duration: 1.2,
           ease: "back.out(1.5)",
-        }
+        },
       );
 
       // 2. Headline Entrance: Morphing text animation (staggered)
@@ -61,41 +60,41 @@ export const HeroSection = () => {
             stagger: 0.15,
             ease: "back.out(1.2)",
           },
-          "-=0.7" // Start slightly before the image finishes animating
+          "-=0.7", // Start slightly before the image finishes animating
         );
       }
 
       // 3. Description Entrance: Smooth slide-up fade
       tl.fromTo(
         descRef.current,
-        { 
-          opacity: 0, 
-          y: 20 
+        {
+          opacity: 0,
+          y: 20,
         },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8 
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
         },
-        "-=0.4"
+        "-=0.4",
       );
 
       // 4. Button Entrance: Sweet elastic pop
       tl.fromTo(
         btnRef.current,
-        { 
-          opacity: 0, 
-          scale: 0.5, 
-          y: 20 
+        {
+          opacity: 0,
+          scale: 0.5,
+          y: 20,
         },
-        { 
-          opacity: 1, 
-          scale: 1, 
-          y: 0, 
-          duration: 1, 
-          ease: "elastic.out(1, 0.5)" 
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          ease: "elastic.out(1, 0.5)",
         },
-        "-=0.5"
+        "-=0.5",
       );
 
       // 5. Scroll Indicator: Gentle fade in
@@ -103,11 +102,11 @@ export const HeroSection = () => {
         scrollRef.current,
         { opacity: 0, y: -15 },
         { opacity: 1, y: 0, duration: 0.6 },
-        "-=0.8"
+        "-=0.8",
       );
 
       // --- CONTINUOUS AMBIENT ANIMATIONS ---
-      
+
       // Image ambient float
       gsap.to(imageRef.current, {
         y: -10,
@@ -137,24 +136,24 @@ export const HeroSection = () => {
         ease: "sine.inOut",
         delay: 2,
       });
-
     }, heroRef); // Scope to the parent container
 
     // Optional: Bubble particles (Optimized)
     const createBubble = () => {
       const bubble = document.createElement("div");
-      bubble.className = "absolute rounded-full bg-orange-500/20 pointer-events-none transform-gpu";
+      bubble.className =
+        "absolute rounded-full bg-orange-500/20 pointer-events-none transform-gpu";
       const size = Math.random() * 15 + 5;
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
       bubble.style.left = `${Math.random() * 100}%`;
       bubble.style.top = `${Math.random() * 100}%`;
-      
+
       const container = imageRef.current?.parentElement;
       if (container) {
         container.style.position = "relative";
         container.appendChild(bubble);
-        
+
         gsap.to(bubble, {
           x: (Math.random() - 0.5) * 100,
           y: (Math.random() - 0.5) * 100 - 50,
@@ -163,7 +162,7 @@ export const HeroSection = () => {
           duration: Math.random() * 2 + 1,
           ease: "power2.out",
           onComplete: () => {
-             if (bubble.parentNode) bubble.remove();
+            if (bubble.parentNode) bubble.remove();
           },
         });
       }
@@ -181,7 +180,7 @@ export const HeroSection = () => {
     };
   }, []);
 
- return (
+  return (
     <section
       id="hero"
       ref={heroRef}
@@ -207,11 +206,13 @@ export const HeroSection = () => {
 
       <div className="container p-4 max-w-4xl mx-auto z-10">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-4">
-          
           {/* Left Side: Picture */}
-          <div ref={imageRef} className="shrink-0 will-change-transform transform-gpu">
+          <div
+            ref={imageRef}
+            className="shrink-0 will-change-transform transform-gpu"
+          >
             <img
-              src="/public/images/taiwo-pic.JPG"
+              src="/images/taiwo-pic.JPG"
               alt="Taiwo Oladipo"
               className="w-48 h-48 md:w-56 md:h-56 object-cover rounded-2xl shadow-lg ring-2 ring-orange-500/30"
             />
@@ -224,8 +225,12 @@ export const HeroSection = () => {
           >
             <h1 className="h-full flex flex-col justify-between text-4xl md:text-6xl font-bold tracking-tight py-1">
               <span className="text-orange-500 will-change-transform">Hi,</span>
-              <span className="text-primary will-change-transform">I'm Taiwo</span>
-              <span className="text-orange-500 text-gradient will-change-transform">Oladipo</span>
+              <span className="text-primary will-change-transform">
+                I'm Taiwo
+              </span>
+              <span className="text-orange-500 text-gradient will-change-transform">
+                Oladipo
+              </span>
             </h1>
           </div>
         </div>
@@ -233,16 +238,19 @@ export const HeroSection = () => {
         {/* Paragraph Description */}
         <div ref={descRef} className="will-change-transform">
           <p className="text-orange-400/90 text-lg md:text-xl text-center max-w-2xl mx-auto mt-6">
-            I create responsive, cross-browser-compatible web applications with a
-            focus on scalability, accessibility, and modern design standards. I
-            translate design mockups into functional user interfaces and
-            collaborate with backend developers and designers to deliver seamless
-            experiences across desktop and mobile devices.
+            I create responsive, cross-browser-compatible web applications with
+            a focus on scalability, accessibility, and modern design standards.
+            I translate design mockups into functional user interfaces and
+            collaborate with backend developers and designers to deliver
+            seamless experiences across desktop and mobile devices.
           </p>
         </div>
 
         {/* Button Wrapper */}
-        <div ref={btnRef} className="pt-8 pb-24 flex justify-center will-change-transform">
+        <div
+          ref={btnRef}
+          className="pt-8 pb-24 flex justify-center will-change-transform"
+        >
           <a href="#projects" className="cosmic-button">
             View my Work
           </a>
@@ -263,7 +271,8 @@ export const HeroSection = () => {
 
       <style jsx>{`
         @keyframes float {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0px) translateX(0px) rotate(0deg);
           }
           25% {
@@ -276,7 +285,7 @@ export const HeroSection = () => {
             transform: translateY(-10px) translateX(5px) rotate(3deg);
           }
         }
-        
+
         .animate-float {
           animation: float infinite ease-in-out;
         }
