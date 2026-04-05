@@ -1,11 +1,16 @@
 <!doctype html>
-<html lang="en">
+<!-- 1. ADD class="dark" RIGHT HERE -->
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oladipo Taiwo's Portfolio</title>
   </head>
-  <body>
+
+  <!-- 2. (Optional but recommended) Add default background colors to body to prevent ANY white flashing on load -->
+  <body
+    class="bg-white text-black dark:bg-[#09090b] dark:text-white transition-colors duration-300"
+  >
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
